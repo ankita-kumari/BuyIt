@@ -63,18 +63,23 @@ class TodoListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListPrototypeCell", forIndexPath: indexPath) as UITableViewCell
-        let buyButton : UIButton = UIButton(type: UIButtonType.RoundedRect)
-        buyButton.frame = CGRectMake(230.0, 3.0, 50.0, 44.0)
-        buyButton.backgroundColor = UIColor.whiteColor()
-        buyButton.setTitle("Buy", forState: UIControlState.Normal)
-        cell.addSubview(buyButton)
+//        let buyButton : UIButton = UIButton(type: UIButtonType.RoundedRect)
+//        buyButton.frame = CGRectMake(230.0, 3.0, 50.0, 44.0)
+//        buyButton.backgroundColor = UIColor.whiteColor()
+//        buyButton.setTitle("Buy", forState: UIControlState.Normal)
+//        cell.addSubview(buyButton)
+        let label:UILabel = UILabel(frame: CGRectMake(15, 3, 100, 30))
+        label.textAlignment = NSTextAlignment.Justified
+        label.textColor = UIColor.blackColor()
+        
         cell.textLabel?.userInteractionEnabled = true
         switch indexPath.section {
         case 0:
             let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as! ToDoItem
-            var attributedText = NSMutableAttributedString(string: todoItem.name)
+            let attributedText = NSMutableAttributedString(string: todoItem.name)
             attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
-            cell.textLabel!.attributedText = attributedText
+//            cell.textLabel!.attributedText = attributedText
+            label.attributedText = attributedText
             if (todoItem.finished) {
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else {
@@ -82,9 +87,10 @@ class TodoListTableViewController: UITableViewController {
             }
         case 1:
             let todoItem = finished.objectAtIndex(UInt(indexPath.row)) as! ToDoItem
-            var attributedText = NSMutableAttributedString(string: todoItem.name)
+            let attributedText = NSMutableAttributedString(string: todoItem.name)
             attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
-            cell.textLabel!.attributedText = attributedText
+//            cell.textLabel!.attributedText = attributedText
+            label.attributedText = attributedText
             if (todoItem.finished) {
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else {
@@ -93,6 +99,7 @@ class TodoListTableViewController: UITableViewController {
         default:
             fatalError("What the fuck did you think ??")
         }
+        cell.contentView.addSubview(label)
         return cell
 
     }

@@ -14,12 +14,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListPrototypeCell" rowHeight="48" id="lsq-2l-iPo">
+                            <tableViewCell contentMode="left" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListPrototypeCell" rowHeight="48" id="lsq-2l-iPo">
                                 <rect key="frame" x="0.0" y="86" width="600" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lsq-2l-iPo" id="Vrh-si-f4q">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tX7-8o-JXL">
+                                            <rect key="frame" x="248" y="8" width="46" height="30"/>
+                                            <state key="normal" title="Buy"/>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -107,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="-873" y="-341"/>
         </scene>
-        <!--View Controller-->
+        <!--Buy it here-->
         <scene sceneID="Idi-fB-ZEv">
             <objects>
                 <viewController id="m7f-dI-kA7" sceneMemberID="viewController">
@@ -119,18 +125,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY0-AI-VWO">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY0-AI-VWO" customClass="WebViewController" customModule="Todo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="51" width="600" height="549"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AzW-Ia-nWi"/>
+                    <navigationItem key="navigationItem" title="Buy it here" id="AzW-Ia-nWi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="psn-YP-H8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389" y="-875"/>
+            <point key="canvasLocation" x="1374" y="-875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4CW-Qi-Ab4">

@@ -19,15 +19,8 @@ class AddTodoItemViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (self.textField.text!.utf16.count > 0) {
-            //self.todoItem = TodoItem(itemName: self.textField.text!)
-            
             todoItem.name = self.textField.text!
             todoItem.finished = false
-            
-//            let realm = RLMRealm.defaultRealm()
-//            realm.beginWriteTransaction()
-//            todoItem.finished = todoItem.finished
-//            realm.commitWriteTransaction()
         }
     }
     
