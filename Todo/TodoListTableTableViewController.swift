@@ -27,7 +27,6 @@ class TodoListTableViewController: UITableViewController {
         let todoItem: ToDoItem = source.todoItem
             
         if todoItem.name != "" {
-//            self.todoItems.append(todoItem)
             let realm = RLMRealm.defaultRealm()
             realm.beginWriteTransaction()
             realm.addObject(todoItem)
@@ -45,22 +44,7 @@ class TodoListTableViewController: UITableViewController {
         super.init(coder: aDecoder)!
     }
     
-//    func loadInitialData() {
-//        todoItems = [
-//            TodoItem(itemName: "Go to the dentist"),
-//            TodoItem(itemName: "Fetch groceries"),
-//            TodoItem(itemName: "Sleep")
-//        ]
-//        finishedItems = []
-//    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-//        
-//        let tappedItem = todoItems[indexPath.row] as TodoItem
-//        tappedItem.completed = !tappedItem.completed
-//        
-//        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         var todoItem: ToDoItem?
         switch indexPath.section {
         case 0:
@@ -75,7 +59,6 @@ class TodoListTableViewController: UITableViewController {
         todoItem?.finished = !todoItem!.finished
         realm.commitWriteTransaction()
         self.tableView.reloadData()
-        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -101,12 +84,21 @@ class TodoListTableViewController: UITableViewController {
             var attributedText = NSMutableAttributedString(string: todoItem.name)
             attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
             cell.textLabel!.attributedText = attributedText
+            if (todoItem.finished) {
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryType.None
+            }
         case 1:
             let todoItem = finished.objectAtIndex(UInt(indexPath.row)) as! ToDoItem
             var attributedText = NSMutableAttributedString(string: todoItem.name)
             attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
             cell.textLabel!.attributedText = attributedText
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            if (todoItem.finished) {
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryType.None
+            }
         default:
             fatalError("What the fuck did you think ??")
         }
