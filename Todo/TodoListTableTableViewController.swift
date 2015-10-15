@@ -62,21 +62,12 @@ class TodoListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let tempCell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("ListPrototypeCell")! as UITableViewCell
-//        let todoItem = todoItems[indexPath.row]
-//        
-//        // Downcast from UILabel? to UILabel
-//        let cell = tempCell.textLabel as UILabel!
-//        cell.text = todoItem.itemName
-//        
-//        if (todoItem.completed) {
-//            tempCell.accessoryType = UITableViewCellAccessoryType.Checkmark;
-//        } else {
-//            tempCell.accessoryType = UITableViewCellAccessoryType.None;
-//        }
-//        
-//        return tempCell
         let cell = tableView.dequeueReusableCellWithIdentifier("ListPrototypeCell", forIndexPath: indexPath) as UITableViewCell
+        let buyButton : UIButton = UIButton(type: UIButtonType.RoundedRect)
+        buyButton.frame = CGRectMake(230.0, 3.0, 50.0, 44.0)
+        buyButton.backgroundColor = UIColor.whiteColor()
+        buyButton.setTitle("Buy", forState: UIControlState.Normal)
+        cell.addSubview(buyButton)
         cell.textLabel?.userInteractionEnabled = true
         switch indexPath.section {
         case 0:
