@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Todo list-->
@@ -21,9 +22,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tX7-8o-JXL">
+                                        <button opaque="NO" tag="200" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tX7-8o-JXL">
                                             <rect key="frame" x="248" y="8" width="46" height="30"/>
                                             <state key="normal" title="Buy"/>
+                                            <connections>
+                                                <action selector="openURL:" destination="VPH-b4-6oJ" eventType="touchUpInside" id="50R-cd-zCz"/>
+                                                <segue destination="tSs-zA-w7T" kind="presentation" identifier="openURL" id="iCD-bJ-S4f"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -47,6 +52,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KqH-p0-5ON" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-118" y="-875"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="0I2-lw-u3I">
+            <objects>
+                <viewController id="tSs-zA-w7T" customClass="WebViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8eO-29-pFO"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Xd-4p-dqh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dvT-F6-Zfb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CiM-MT-UrC">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="BuyIt here" id="jX0-Lm-Kmp">
+                                        <barButtonItem key="backBarButtonItem" title="Done" id="d3F-oA-gK7"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="QZK-DI-yCu">
+                                            <connections>
+                                                <segue destination="C5Y-BY-Ttv" kind="unwind" unwindAction="unwindToList:" id="v7Q-oO-RtB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UU-L0-o02">
+                                <rect key="frame" x="28" y="85" width="544" height="495"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0UU-L0-o02" firstAttribute="leading" secondItem="dvT-F6-Zfb" secondAttribute="leadingMargin" constant="8" id="16G-A6-YWm"/>
+                            <constraint firstItem="CiM-MT-UrC" firstAttribute="top" secondItem="8eO-29-pFO" secondAttribute="bottom" constant="8" id="3A0-Ev-zLs"/>
+                            <constraint firstItem="0UU-L0-o02" firstAttribute="top" secondItem="8eO-29-pFO" secondAttribute="bottom" constant="65" id="72U-AN-XO4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CiM-MT-UrC" secondAttribute="trailing" constant="-20" id="mZp-NG-2tD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0UU-L0-o02" secondAttribute="trailing" constant="8" id="oZE-Tp-And"/>
+                            <constraint firstItem="5Xd-4p-dqh" firstAttribute="top" secondItem="0UU-L0-o02" secondAttribute="bottom" constant="-24" id="y3V-uD-W2f"/>
+                            <constraint firstItem="CiM-MT-UrC" firstAttribute="leading" secondItem="dvT-F6-Zfb" secondAttribute="leadingMargin" constant="-20" id="ziU-j0-5Uc"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="0UU-L0-o02" id="bW3-qp-myV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkW-hG-BDQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="C5Y-BY-Ttv" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="558" y="-880"/>
         </scene>
         <!--Add a todo-->
         <scene sceneID="ufC-wZ-h7g">
@@ -93,7 +150,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <exit id="BXi-z8-yOe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="582" y="105"/>
+            <point key="canvasLocation" x="594" y="-173"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="feg-KP-UR2">
@@ -113,31 +170,6 @@
             </objects>
             <point key="canvasLocation" x="-873" y="-341"/>
         </scene>
-        <!--Buy it here-->
-        <scene sceneID="Idi-fB-ZEv">
-            <objects>
-                <viewController id="m7f-dI-kA7" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="psl-oW-OVW"/>
-                        <viewControllerLayoutGuide type="bottom" id="8gg-Lb-tu8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jbp-R9-REc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY0-AI-VWO" customClass="WebViewController" customModule="Todo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="51" width="600" height="549"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Buy it here" id="AzW-Ia-nWi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="psn-YP-H8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1374" y="-875"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="4CW-Qi-Ab4">
             <objects>
@@ -154,25 +186,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdD-6s-nFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118" y="105"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="06L-IV-YGW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r3p-5s-vdh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kp6-h5-JYK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="m7f-dI-kA7" kind="relationship" relationship="rootViewController" id="M3Y-SY-rO1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gN0-18-04X" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="582" y="-875"/>
+            <point key="canvasLocation" x="-118" y="-173"/>
         </scene>
     </scenes>
 </document>

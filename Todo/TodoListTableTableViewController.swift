@@ -7,7 +7,9 @@ import UIKit
 import Realm
 
 class TodoListTableViewController: UITableViewController {
-
+    
+    var URL = NSURL(string : "")
+    
     var todos: RLMResults {
         get {
             let predicate = NSPredicate(format: "finished == false", argumentArray: nil)
@@ -40,6 +42,8 @@ class TodoListTableViewController: UITableViewController {
         
     }
     
+    
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -61,6 +65,32 @@ class TodoListTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    @IBAction func openURL(sender: UIButton) {
+        let button = sender
+        performSegueWithIdentifier("openURL", sender: button)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "openURL") {
+            let button = sender
+            let view = button.superview!
+            let cell = view?.superview as! UITableViewCell
+            let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
+            var todoItem:ToDoItem = ToDoItem()
+            switch indexPath.section {
+            case 0:
+                todoItem = todos.objectAtIndex(UInt(indexPath.row)) as! ToDoItem
+            case 1:
+                todoItem = finished.objectAtIndex(UInt(indexPath.row)) as! ToDoItem
+            default:
+                fatalError("What the fuck did you think?!")
+            }
+            let webview = segue.destinationViewController as! WebViewController
+            webview.url = NSURL(string : todoItem.href)
+        }
+    }
+
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListPrototypeCell", forIndexPath: indexPath) as UITableViewCell
         for view in cell.contentView.subviews {
@@ -68,10 +98,11 @@ class TodoListTableViewController: UITableViewController {
                 view.removeFromSuperview()
             }
         }
-        let label:UILabel = UILabel(frame: CGRectMake(15, 3, 100, 30))
+        let label:UILabel = UILabel(frame: CGRectMake(15, 3, 200, 30))
         label.textAlignment = NSTextAlignment.Justified
         label.textColor = UIColor.blackColor()
         
+        //var buyButton: UIButton =
         cell.textLabel?.userInteractionEnabled = true
         switch indexPath.section {
         case 0:
